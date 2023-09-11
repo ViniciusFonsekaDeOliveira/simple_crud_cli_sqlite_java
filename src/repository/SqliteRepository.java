@@ -1,9 +1,10 @@
 package src.repository;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class SqliteRepository implements SQLRepository{
+public class SqliteRepository implements SQLRepository, AutoCloseable{
     private final Connection connection;
 
     public SqliteRepository(Connection connection) throws SQLException{
@@ -19,4 +20,7 @@ public class SqliteRepository implements SQLRepository{
     public void update(String tableName, Map<String, String> dataIdentifier, Map<String, String> updatedData){}
     public void delete(String tableName, Map<String, String> dataIdentifier){}
     public void closeConnection(){}
+    public void close(){
+        this.closeConnection();
+    }
 }
